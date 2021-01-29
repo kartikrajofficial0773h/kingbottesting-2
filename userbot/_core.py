@@ -10,8 +10,8 @@ from userbot import ALIVE_NAME, CmdHelp
 from userbot import bot as hellbot
 
 DELETE_TIMEOUT = 5
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Hell User"
-hell_logo = "./KRAKEN/hellbot_logo.jpg"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "KINGBOT User"
+kingbot_logo = "./KARTIK/kingbot_logo.jpg"
 
 
 @hellbot.on(admin_cmd(pattern=r"send (?P<shortname>\w+)", outgoing=True))
@@ -19,9 +19,9 @@ hell_logo = "./KRAKEN/hellbot_logo.jpg"
 async def send(event):
     if event.fwd_from:
         return
-    kraken = hellbot.uid
+    kartik = kingbot.uid
     message_id = event.message.id
-    thumb = hell_logo
+    thumb = king_logo
     input_str = event.pattern_match.group(1)
     the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
     if os.path.exists(the_plugin_file):
@@ -36,15 +36,15 @@ async def send(event):
         )
         end = datetime.now()
         time_taken_in_ms = (end - start).seconds
-        await edit_or_reply(lauda, f"**⍟ Plugin name ≈** `{input_str}`\n**⍟ Uploaded in ≈** `{time_taken_in_ms} secs`\n**⍟ Uploaded by ≈** [{DEFAULTUSER}](tg://user?id={kraken})\n"
+        await edit_or_reply(lauda, f"**😌 Plugin name ≈** `{input_str}`\n**⍟ Uploaded in ≈** `{time_taken_in_ms} secs`\n**⍟ Uploaded by ≈** [{DEFAULTUSER}](tg://user?id={kartik})\n"
         )
         await asyncio.sleep(DELETE_TIMEOUT)
         await event.delete()
     else:
-        await edit_or_reply(event, "File not found..... Kek")
+        await edit_or_reply(event, "File not founded this is not available on this bot...🥺🥺")
 
-@hellbot.on(admin_cmd(pattern=r"install"))
-@hellbot.on(sudo_cmd(pattern=r"install", allow_sudo=True))
+@kingbot.on(admin_cmd(pattern=r"install"))
+@kingbot.on(sudo_cmd(pattern=r"install", allow_sudo=True))
 async def install(event):
     if event.fwd_from:
         return
@@ -76,21 +76,21 @@ async def install(event):
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
     
-@hellbot.on(admin_cmd(pattern=r"uninstall (?P<shortname>\w+)", outgoing=True))
-@hellbot.on(sudo_cmd(pattern=r"uninstall (?P<shortname>\w+)", allow_sudo=True))
+@kingbot.on(admin_cmd(pattern=r"uninstall (?P<shortname>\w+)", outgoing=True))
+@kingbot.on(sudo_cmd(pattern=r"uninstall (?P<shortname>\w+)", allow_sudo=True))
 async def unload(kraken):
-    if kraken.fwd_from:
+    if kartik.fwd_from:
         return
-    shortname = kraken.pattern_match["shortname"]
+    shortname = kartik.pattern_match["shortname"]
     dir_path =f"./userbot/plugins/{shortname}.py"
     try:
         remove_plugin(shortname)
         os.remove(dir_path)
-        await kraken.edit(f"Uninstalled `{shortname}` successfully")
+        await kartik.edit(f"Uninstalled `{shortname}` successfully")
     except OSError as e:
-        await kraken.edit("Error: %s : %s" % (dir_path, e.strerror))
+        await kartik.edit("Error: %s : %s" % (dir_path, e.strerror))
 
-@hellbot.on(admin_cmd(pattern=r"unload (?P<shortname>\w+)$"))
+@kingbot.on(admin_cmd(pattern=r"unload (?P<shortname>\w+)$"))
 async def unload(event):
     if event.fwd_from:
         return
@@ -134,5 +134,5 @@ CmdHelp("core").add_command(
 ).add_command(
   "send", "<file name>", "Sends the given file from your userbot server, if any.", "send alive"
 ).add_command(
-  "cmds", None, "Gives out the list of modules in HellBot."
+  "cmds", None, "Gives out the list of modules in KINGBot."
 ).add()
